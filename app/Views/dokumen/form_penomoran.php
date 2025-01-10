@@ -411,10 +411,15 @@
             contentType: false,
             success: function(response) {
                 if (response.status === 'success') {
-                    showModal('Data berhasil dikirim!' + response.message
-                    );
+                    showModal('Data berhasil dikirim!' + response.message);
+                    setTimeout(function() {
+                        location.reload();
+                    }, 4000);
                 } else if (response.status === 'exists') {
                     showModal(response.message);
+                    setTimeout(function() {
+                        location.reload();
+                    }, 5000);
                 } else {
                     showModal('Pengiriman data gagal: ' + response.message);
                 }

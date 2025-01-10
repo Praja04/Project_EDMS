@@ -268,11 +268,20 @@ class UploaderController extends BaseController
         ];
 
         // Simpan ke database
+        // $id_pengajuan = $this->pengajuanrevisiModel
+        //     ->where('dokumen_id', $idDokumen)
+        //     ->where('is_seen', 0)
+        //     ->first();
+        // $this->pengajuanrevisiModel->update($id_pengajuan['pengajuan_id'], ['is_seen' => 1]);
         $id_pengajuan = $this->pengajuanrevisiModel
-            ->where('dokumen_id', $idDokumen)
-            ->where('is_seen', 0)
-            ->first();
-        $this->pengajuanrevisiModel->update($id_pengajuan['pengajuan_id'], ['is_seen' => 1]);
+        ->where('dokumen_id', $idDokumen)
+        ->where('is_seen', 0)
+        ->first();
+
+        // Update jika pengajuan revisi ditemukan
+        if ($id_pengajuan) {
+            $this->pengajuanrevisiModel->update($id_pengajuan['pengajuan_id'], ['is_seen' => 1]);
+        }
         $result = $this->revisiModel->save($data);
 
         // Buat respons JSON
