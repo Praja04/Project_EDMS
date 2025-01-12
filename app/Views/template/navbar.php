@@ -54,7 +54,7 @@
 							<a href="<?= base_url('admin/dokumen/unverified') ?>"><i class="mdi mdi-verified"><span class="path1"></span><span class="path2"></span></i>Verifikasi <span id="notif_verifikasi"></a>
 
 						</li>
-						
+
 						<!-- <li class="treeview">
 							<a href="#">
 								<i class="mdi mdi-publish"><span class="path1"></span><span class="path2"></span></i>
@@ -82,39 +82,43 @@
 
 					<?php elseif (session()->get('role') == 'kasi') : ?>
 
-						<li class="treeview">
-							<a href="#">
-								<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
-								<span>Dashboard</span>
-								<span class="pull-right-container" id="verifikasi">
-									<i class="fa fa-angle-right pull-right"></i>
+						<li>
+							<a href="<?= base_url('dokumen/drawing') ?>">
+								<i class="mdi mdi-publish"><span class="path1"></span><span class="path2"></span></i>
+								<span>View Drawing</span>
+								<span class="pull-right-container">
 							</a>
-							<ul class="treeview-menu">
-								<li><a href="<?= base_url('dashboard') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Dashboard</a></li>
 
-							</ul>
 						</li>
-						<li class="treeview">
+						<li>
+							<a href="<?= base_url('admin/dokumen/unverified') ?>"><i class="mdi mdi-verified"><span class="path1"></span><span class="path2"></span></i>Verifikasi <span id="notif_verifikasi"></a>
+
+						</li>
+
+						<!-- <li class="treeview">
 							<a href="#">
-								<i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
+								<i class="mdi mdi-publish"><span class="path1"></span><span class="path2"></span></i>
 								<span>Publish & Trial</span>
 								<span class="pull-right-container">
 									<i class="fa fa-angle-right pull-right"></i>
 							</a>
 							<ul class="treeview-menu">
-								<li><a href="<?= base_url('publish/drawing') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Drawing Published</a></li>
+								<li><a href="<?= base_url('publish') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Drawing Published</a></li>
 								<li><a href="<?= base_url('trial/drawing') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>List Drawing Trial</a></li>
+							</ul>
+						</li> -->
+						<li class="treeview">
+							<a href="#">
+								<i class="mdi mdi-book-multiple"><span class="path1"></span><span class="path2"></span></i>
+								<span>Log Book</span>
+								<span class="pull-right-container">
+									<i class="fa fa-angle-right pull-right"></i>
+							</a>
+							<ul class="treeview-menu">
+								<li><a href="<?= base_url('admin/logbook') ?>"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Log Book Drawing</a></li>
 							</ul>
 						</li>
 
-
-						<li class="header">Mold CBI</li>
-						<li class="">
-							<a target="blank" href="https://portal3.incoe.astra.co.id/pce-mold-management/public/dashboard-admin">
-								<i class="icon-File"><span class="path1"></span><span class="path2"></span></i>
-								<span>Mold Management</span>
-							</a>
-						</li>
 					<?php elseif (session()->get('role') == 'reader_pce') : ?>
 						<li class="treeview">
 							<a href="#">

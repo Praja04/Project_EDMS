@@ -29,6 +29,13 @@ class AdminController extends BaseController
 
     public function unverified()
     {
+        $allowed_roles = ['admin','kasi'];
+        $user_role = session()->get('role');
+        
+        if (!session()->get('is_login') || !in_array($user_role, $allowed_roles)) {
+            session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+            return redirect()->to(base_url('/')); // Ganti '/' dengan URL halaman yang sesuai
+        }
 
         $data = [
             'data' => $this->dokumenModel->getUnverifiedDocuments(),
@@ -40,6 +47,13 @@ class AdminController extends BaseController
 
     public function gethistoryRevisi($id_dokumen)
     {
+        $allowed_roles = ['admin', 'kasi'];
+        $user_role = session()->get('role');
+
+        if (!session()->get('is_login') || !in_array($user_role, $allowed_roles)) {
+            session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+            return redirect()->to(base_url('/')); // Ganti '/' dengan URL halaman yang sesuai
+        }
         // Mendapatkan data dokumen berdasarkan dokumen_id
         $dokumenData = $this->dokumenModel->find($id_dokumen);
         $data = [
@@ -128,6 +142,13 @@ class AdminController extends BaseController
 
     public function logbook()
     {
+        $allowed_roles = ['admin', 'kasi'];
+        $user_role = session()->get('role');
+
+        if (!session()->get('is_login') || !in_array($user_role, $allowed_roles)) {
+            session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+            return redirect()->to(base_url('/')); // Ganti '/' dengan URL halaman yang sesuai
+        }
         $GetPdf = $this->revisiModel->showDistinct();
         $dataPdf['data'] = $GetPdf;
         //return $this->response->setJSON($dataPdf);
@@ -136,6 +157,13 @@ class AdminController extends BaseController
 
     public function logbook_detail($id)
     {
+        $allowed_roles = ['admin', 'kasi'];
+        $user_role = session()->get('role');
+
+        if (!session()->get('is_login') || !in_array($user_role, $allowed_roles)) {
+            session()->setFlashdata('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+            return redirect()->to(base_url('/')); // Ganti '/' dengan URL halaman yang sesuai
+        }
         $data['data'] = $this->revisiModel->showDistinctLogbookDetail($id);
         return view('logbook/logbook_detail', $data);
         //return $this->response->setJSON($data);

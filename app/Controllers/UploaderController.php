@@ -161,7 +161,7 @@ class UploaderController extends BaseController
 
             if ($file->isValid() && !$file->hasMoved()) {
                 // Path file lama
-                $oldFilePath = ROOTPATH  . 'public/uploads/' . $existingPdf['file_path'];
+                $oldFilePath = ROOTPATH  . 'public/uploads/revisi/' . $existingPdf['file_path'];
 
                 // Hapus file lama jika ada
                 if (file_exists($oldFilePath)) {
@@ -170,7 +170,7 @@ class UploaderController extends BaseController
 
                 // Simpan file baru
                 $newName = $file->getRandomName();
-                $file->move(ROOTPATH  . 'public/uploads', $newName);
+                $file->move(ROOTPATH  . 'public/uploads/revisi/', $newName);
 
                 // Update path di database
                 $this->dokumenModel->update($idDokumen, ['file_path' => $newName]);

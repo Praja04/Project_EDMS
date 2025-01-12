@@ -69,7 +69,7 @@
                                                                 Upload Pdf
                                                             </button>
                                                         <?php else : ?>
-                                                            <button type="button" class="btn btn-success btn-pdf-modal" data-pdf="<?= base_url('uploads/' . $user['file_path']); ?>">
+                                                            <button type="button" class="btn btn-success btn-pdf-modal" data-pdf="<?= base_url('uploads/revisi/' . $user['file_path']); ?>">
                                                                 <i class="fa fa-file-pdf-o"></i> Lihat PDF
                                                             </button>
                                                             <button type="button" class="btn btn-warning ganti-button" data-bs-toggle="modal" data-bs-target="#modal-left" data-id-pdf="<?= $user['dokumen_id'] ?>">Ganti PDF</button>
