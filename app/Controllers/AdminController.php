@@ -150,9 +150,9 @@ class AdminController extends BaseController
         }
 
         // Hapus file dokumen jika ada
-        if (!empty($dokumen['file_path'])) {
-            unlink(ROOTPATH . 'public/uploads/' . $dokumen['file_path']);
-        }
+        // if (!empty($dokumen['file_path'])) {
+        //     unlink(ROOTPATH . 'public/uploads/' . $dokumen['file_path']);
+        // }
 
         // Hapus data di tabel Revisi
         $revisiList = $this->revisiModel->where('dokumen_id', $id_dokumen)->findAll();

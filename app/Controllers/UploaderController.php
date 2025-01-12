@@ -113,17 +113,17 @@ class UploaderController extends BaseController
             $newName = $file->getRandomName();
 
             // Pindahkan ke folder utama
-            $file->move(ROOTPATH . 'public/uploads', $newName);
+            $file->move(ROOTPATH . 'public/uploads/revisi/', $newName);
 
             // Salin file ke folder revisi
-            $sourcePath = ROOTPATH . 'public/uploads/' . $newName;
-            $destinationPath = ROOTPATH . 'public/uploads/revisi/' . $newName;
-            if (!copy($sourcePath, $destinationPath)) {
-                return $this->response->setJSON([
-                    'status' => 'error',
-                    'message' => 'Gagal menyalin file ke folder revisi.',
-                ]);
-            }
+            //$sourcePath = ROOTPATH . 'public/uploads/' . $newName;
+            // $destinationPath = ROOTPATH . 'public/uploads/revisi/' . $newName;
+            // if ($destinationPath) {
+            //     return $this->response->setJSON([
+            //         'status' => 'error',
+            //         'message' => 'Gagal menyalin file ke folder revisi.',
+            //     ]);
+            // }
 
             // Update path di database
             $this->dokumenModel->update($idDokumen, ['file_path' => $newName]);
