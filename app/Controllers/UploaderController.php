@@ -110,6 +110,12 @@ class UploaderController extends BaseController
             ]);
         }
         if ($file->isValid() && !$file->hasMoved()) {
+            if ($file->getMimeType() !== 'application/pdf') {
+                return $this->response->setJSON([
+                    'status' => 'error',
+                    'message' => 'File yang diunggah harus berupa PDF.',
+                ]);
+            }
             $newName = $file->getRandomName();
 
             // Pindahkan ke folder utama
@@ -160,6 +166,12 @@ class UploaderController extends BaseController
             $file = $this->request->getFile('pdf_drawing');
 
             if ($file->isValid() && !$file->hasMoved()) {
+                if ($file->getMimeType() !== 'application/pdf') {
+                    return $this->response->setJSON([
+                        'status' => 'error',
+                        'message' => 'File yang diunggah harus berupa PDF.',
+                    ]);
+                }
                 // Path file lama
                 $oldFilePath = ROOTPATH  . 'public/uploads/revisi/' . $existingPdf['file_path'];
 
@@ -174,6 +186,8 @@ class UploaderController extends BaseController
 
                 // Update path di database
                 $this->dokumenModel->update($idDokumen, ['file_path' => $newName]);
+                $dokumen = $this->revisiModel->where('dokumen_id', $idDokumen)->where('keterangan_revisi',0)->first();
+                $this->revisiModel->update($dokumen['revisi_id'], ['file_revisi' => $newName]);
 
                 return $this->response->setJSON([
                     'status' => 'success',
@@ -232,7 +246,12 @@ class UploaderController extends BaseController
                 'message' => 'File revisi tidak valid atau belum diunggah.'
             ]);
         }
-
+        if ($fileRevisi->getMimeType() !== 'application/pdf') {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'File yang diunggah harus berupa PDF.',
+            ]);
+        }
         // Cek revisi sebelumnya untuk dokumen ini dan ambil nilai keterangan_revisi yang ada
         $lastRevisi = $this->revisiModel->select('keterangan_revisi')
             ->where('dokumen_id', $idDokumen)
@@ -390,6 +409,12 @@ class UploaderController extends BaseController
             $file = $this->request->getFile('pdf_drawing');
 
             if ($file->isValid() && !$file->hasMoved()) {
+                if ($file->getMimeType() !== 'application/pdf') {
+                    return $this->response->setJSON([
+                        'status' => 'error',
+                        'message' => 'File yang diunggah harus berupa PDF.',
+                    ]);
+                }
                 // Path file lama
                 $oldFilePath = ROOTPATH  . 'public/uploads/revisi/' . $existingPdf['file_revisi'];
 

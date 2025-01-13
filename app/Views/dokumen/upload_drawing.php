@@ -257,22 +257,34 @@
                 processData: false,
                 contentType: false,
                 success: function(response) {
-                    if (response.message) {
+                    if (response.status === 'success') {
                         showModal('Data berhasil diperbarui!');
                         $('#modal-right').modal('hide');
+
+                        // Reload halaman setelah jeda
                         setTimeout(function() {
                             location.reload();
                         }, 4000);
-                    } else if (response.error) {
-                        showModal('Gagal memperbarui data: ' + response.error);
+                    } else if (response.status === 'error') {
+                        // Tampilkan pesan error dari respons server
+                        const errorMessage = response.message || 'Gagal memperbarui data.';
+                        showModal('Gagal memperbarui data: ' + errorMessage);
+                    } else {
+                        // Penanganan untuk status tak terduga
+                        showModal('Respons tidak dikenali. Silakan coba lagi.');
                     }
                 },
                 error: function(xhr, status, error) {
+                    // Log detail error untuk debugging
                     console.error('Error:', error);
-                    console.error('Response Text:', xhr.responseText); // Respons server
-                    console.log('XHR Object:', xhr); // Objek XMLHttpRequest penuh
-                    showModal('Terjadi kesalahan saat mengirim data.');
+                    console.error('Status:', status);
+                    console.error('Response Text:', xhr.responseText);
+
+                    // Tampilkan pesan error kepada pengguna
+                    const errorMessage = xhr.responseJSON?.message || 'Terjadi kesalahan saat memproses permintaan.';
+                    showModal('Terjadi kesalahan: ' + errorMessage);
                 }
+
             });
         });
 
